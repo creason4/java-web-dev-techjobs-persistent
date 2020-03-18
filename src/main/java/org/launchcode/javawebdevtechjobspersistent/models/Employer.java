@@ -9,6 +9,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -19,17 +20,16 @@ public class Employer extends AbstractEntity {
     private String location;
 
     @OneToMany
-    @JoinColumn(name="employer_id")
+    @JoinColumn
     private List<Job> jobs = new ArrayList<>();
 
-    public Employer(@NotBlank @Size(min=3, max=100)
-                    String location, List<Job> jobs){
-        this.location = location;
-        this.jobs = jobs;
-    }
+   public Employer(@NotBlank @Size(min=3, max=100)
+                 String location, List<Job> jobs){
+       this.location = location;
+       this.jobs = jobs;
+   }
 
     public Employer() {
-
     }
 
     public String getLocation() {
@@ -42,9 +42,14 @@ public class Employer extends AbstractEntity {
 
     public List<Job> getJobs() {
         return jobs;
-    }
+   }
 
     public void setJobs(List<Job> jobs) {
-        this.jobs = jobs;
-    }
+       this.jobs = jobs;
+  }
+//
+//    @Override
+//    public Collection<Object> toLowerCase() {
+//        return null;
+//    }
 }

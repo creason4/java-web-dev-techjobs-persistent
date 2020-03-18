@@ -20,8 +20,18 @@ public class SkillController {
     @Autowired
     private SkillRepository skillRepository;
 
-    public SkillController(SkillRepository skillRepository) {
-        this.skillRepository = skillRepository;
+//    public SkillController(SkillRepository skillRepository) {
+//        this.skillRepository = skillRepository;
+//    }
+
+    @Autowired
+    private EmployerRepository employerRepository;
+
+    @GetMapping
+    public String displayAllSkills(Model model) {
+        model.addAttribute("title", "All Skills");
+        model.addAttribute("skills", skillRepository.findAll());
+        return "skills/index";
     }
 
     @GetMapping("add")
@@ -49,6 +59,7 @@ public class SkillController {
         if (optSkill.isPresent()) {
             Skill skill = (Skill) optSkill.get();
             model.addAttribute("skill", skill);
+            model.addAttribute("jobs", skill.getJobs());
             return "skills/view";
         } else {
             return "redirect:../";

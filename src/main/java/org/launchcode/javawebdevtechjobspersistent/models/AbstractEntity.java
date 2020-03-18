@@ -5,6 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 import java.util.Objects;
 
 @MappedSuperclass
@@ -48,4 +49,5 @@ public abstract class AbstractEntity {
         return Objects.hash(id);
     }
 
+//    public abstract Collection<Object> toLowerCase();
 }

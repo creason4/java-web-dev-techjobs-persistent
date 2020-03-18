@@ -17,10 +17,13 @@ public class EmployerController {
 
     @Autowired
     private EmployerRepository employerRepository;
+    private Employer newEmployer;
+    private Errors errors;
+    private Model model;
 
-    public EmployerController(EmployerRepository employerRepository) {
-        this.employerRepository = employerRepository;
-    }
+//    public EmployerController(EmployerRepository employerRepository) {
+//        this.employerRepository = employerRepository;
+//    }
 
     @GetMapping("add")
     public String displayAddEmployerForm(Model model) {
@@ -31,6 +34,9 @@ public class EmployerController {
     @PostMapping("add")
     public String processAddEmployerForm(@ModelAttribute @Valid Employer newEmployer,
                                     Errors errors, Model model) {
+        this.newEmployer = newEmployer;
+        this.errors = errors;
+        this.model = model;
 
         if (errors.hasErrors()) {
             return "employers/add";
@@ -43,7 +49,7 @@ public class EmployerController {
     @GetMapping("view/{employerId}")
     public String displayViewEmployer(Model model, @PathVariable int employerId) {
 
-        Optional optEmployer = employerRepository.findById(employerId);
+        Optional<Employer> optEmployer = employerRepository.findById(employerId);
         if (optEmployer.isPresent()) {
             Employer employer = (Employer) optEmployer.get();
             model.addAttribute("employer", employer);

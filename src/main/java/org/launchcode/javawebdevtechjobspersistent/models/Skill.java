@@ -6,6 +6,7 @@ import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -31,4 +32,13 @@ public class Skill extends AbstractEntity {
     public List<Job> getJobs() {
         return jobs;
     }
+
+    public void setJobs(List<Job> jobs) {
+        this.jobs = jobs;
+    }
+
+//    @Override
+//    public Collection<Object> toLowerCase() {
+//        return null;
+//    }
 }
